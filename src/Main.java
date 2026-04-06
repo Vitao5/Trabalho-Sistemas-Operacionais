@@ -39,7 +39,7 @@ public class Main {
 
             else{
                 System.out.println("Numero incorreto, tente novamente!!");
-                break;
+                continue;
             }
 
         }while(!sair);
