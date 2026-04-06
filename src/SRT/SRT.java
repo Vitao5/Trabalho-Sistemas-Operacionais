@@ -21,7 +21,7 @@ public class SRT {
                 tempoTotal++;
 
                 if(atual.getTempo() == 0){
-                    System.out.println("Arquivo: " + atual.getNome() + "finalizado | tempo total:" + tempoTotal);
+                    System.out.println("Arquivo: " + atual.getNome() + "finalizado");
                     processo.deleteProcessFinish(atual.getNome());
                 }
             }
