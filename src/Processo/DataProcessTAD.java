@@ -7,4 +7,5 @@ public interface DataProcessTAD {
     void updateProcess(String nome);
     void deleteProcessFinish(String nome);
     DataProcess getProcess(String nome);
+    boolean hasNoProcesses();
 }

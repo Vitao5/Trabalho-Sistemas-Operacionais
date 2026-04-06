@@ -59,6 +59,10 @@ public class ProcessManipulation implements DataProcessTAD {
         return processo.get(nome);
     }
 
+    public boolean hasNoProcesses() {
+        return processo.isEmpty(); // Aqui 'processo' é o seu Map
+    }
+
 
 
 }
