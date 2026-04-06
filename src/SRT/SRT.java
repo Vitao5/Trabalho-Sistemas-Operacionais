@@ -15,13 +15,13 @@ public class SRT {
 
             if(atual != null){
 
-                System.out.println("Aquivo atual " + atual.getNome() + "Tempo restante " + atual.getTempo());
+                System.out.println("processo atual " + atual.getNome() + "Tempo restante " + atual.getTempo());
 
                 atual.setTempo(atual.getTempo() - 1);
                 tempoTotal++;
 
                 if(atual.getTempo() == 0){
-                    System.out.println("Arquivo: " + atual.getNome() + "finalizado");
+                    System.out.println("processo: " + atual.getNome() + "finalizado");
                     processo.deleteProcessFinish(atual.getNome());
                 }
             }
