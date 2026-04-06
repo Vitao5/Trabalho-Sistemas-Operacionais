@@ -34,6 +34,7 @@ public class Main {
 
             if(menu == 2){
                 sair = true;
+                break;
             }
 
             else{
