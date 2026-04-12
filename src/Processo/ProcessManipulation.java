@@ -58,6 +58,9 @@ public class ProcessManipulation implements DataProcessTAD {
     public DataProcess getProcess(String nome){
         return processo.get(nome);
     }
+    public Map<String, DataProcess> getAllProcess(){
+        return processo;
+    }
 
     public boolean hasNoProcesses() {
         return processo.isEmpty(); // Aqui 'processo' é o seu Map
