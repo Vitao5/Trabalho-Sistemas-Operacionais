@@ -51,8 +51,6 @@ SistemasOperacionais/
 ### 📍 Passos
 
 **1️⃣ Navegue até a pasta do projeto:**
-```powershell
-```
 
 **2️⃣ Compile os arquivos:**
 ```powershell
