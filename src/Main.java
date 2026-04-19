@@ -59,7 +59,7 @@ public class Main {
                         continue;
                     } else {
                         try {
-                            runProcess();
+                            runProcess(pr);
                         } catch (InterruptedException e) {
                             System.out.println("Ocorreu um erro");
                         }

@@ -5,17 +5,13 @@ import Processo.ProcessManipulation;
 
 public class SRT {
 
-    static ProcessManipulation pr = new ProcessManipulation();
-
-
-    public static void runProcess() throws InterruptedException {
+    public static void runProcess(ProcessManipulation pr) throws InterruptedException {
         DataProcess processMoment;
 
         System.out.println("INICIANDO O PROCESSO DE ESCALONAMENTO SRT\n");
 
         Integer tempoAtual = 0;
         while (!pr.hasNoProcesses()) {
-            tempoAtual++;
             processMoment = pr.getNextProcess(tempoAtual);
             System.out.println(
                     "\n\n==========================  TEMPO ATUAL: " + tempoAtual + "  ==========================");
@@ -45,6 +41,7 @@ public class SRT {
                 }
                 Thread.sleep(1000);
             }
+            tempoAtual++;
         }
         System.out.println("FIM EXECUÇÃO\n");
     }
