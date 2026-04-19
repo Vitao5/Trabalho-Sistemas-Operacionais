@@ -5,13 +5,22 @@ public class DataProcess {
     private Integer tempo;
     private String status;
     private Integer tempoEspera;
+    private Integer tempoChegada;
 
-
-    public DataProcess(String nome, Integer tempo, String status, Integer tempoEspera) {
+    public DataProcess(String nome, Integer tempo, String status, Integer tempoEspera, Integer tempoChegada) {
         this.nome = nome;
         this.tempo = tempo;
         this.status = status;
         this.tempoEspera = tempoEspera;
+        this.tempoChegada = tempoChegada;
+
+    }
+    public Integer getTempoChegada() {
+        return tempoChegada;
+    }
+    
+    public void setTempoChegada(Integer tempoChegada) {
+        this.tempoChegada = tempoChegada;
     }
 
     public Integer getTempoEspera() {
