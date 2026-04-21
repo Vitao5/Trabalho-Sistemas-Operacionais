@@ -4,6 +4,7 @@
 [![Status](https://img.shields.io/badge/Status-Ativo-brightgreen)]()
 [![Licença](https://img.shields.io/badge/Licença-Acadêmico-blue)]()
 
+
 ## 📋 Descrição
 
 Projeto acadêmico de **Sistemas Operacionais** que implementa um escalonador de processos utilizando o algoritmo **SRT (Shortest Remaining Time)**, também conhecido como preempção por tempo restante mais curto.
