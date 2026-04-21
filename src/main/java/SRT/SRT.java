@@ -2,11 +2,14 @@ package SRT;
 
 import Processo.DataProcess;
 import Processo.ProcessManipulation;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SRT {
 
     public static void runProcess(ProcessManipulation pr) throws InterruptedException {
         DataProcess processMoment;
+        List<String> historico = new ArrayList<>();
 
         System.out.println("\nINICIANDO O PROCESSO DE ESCALONAMENTO SRT\n");
 
@@ -14,13 +17,16 @@ public class SRT {
         while (!pr.hasNoProcesses()) {
             processMoment = pr.getNextProcess(tempoAtual);
 
-            pr.printTimeline(tempoAtual, processMoment);
+            pr.imprimirEstadoTabela(tempoAtual, processMoment);
 
             if (processMoment == null) {
-                Thread.sleep(1000);
+                historico.add("-");
+                Thread.sleep(500);
                 tempoAtual++;
                 continue;
             }
+
+            historico.add(processMoment.getNome());
 
             if (pr.callNextProcess(tempoAtual, processMoment.getNome()) == null) {
                 pr.updateProcess(processMoment.getNome());
@@ -33,10 +39,12 @@ public class SRT {
                         }
                     }
                 }
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }
             tempoAtual++;
         }
-        System.out.println("\nFIM EXECUÇÃO SRT\n");
+        
+        pr.printGantt("STATUS GERAL (GANTT) - SRT", historico);
+        System.out.println("FIM EXECUÇÃO SRT\n");
     }
 }
