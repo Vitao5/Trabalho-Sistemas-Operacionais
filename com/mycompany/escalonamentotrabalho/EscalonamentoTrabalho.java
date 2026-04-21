@@ -1,10 +1,12 @@
+
+package com.mycompany.escalonamentotrabalho;
 import Processo.DataProcess;
 import Processo.ProcessManipulation;
+import SRT.SRT;
+import com.mycompany.escalonamentotrabalho.Prioridade.Prioridade;
 import java.util.Scanner;
 
-import static SRT.SRT.runProcess;
-
-public class Main {
+public class EscalonamentoTrabalho {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -12,12 +14,13 @@ public class Main {
 
         boolean sair = false;
         do {
-            System.out.println("\n==========================  MENU  ==========================\n\n");
-            System.out.println("1 - Adicionar novos processos:");
-            System.out.println("2 - Iniciar o processo de escalonamento");
-            System.out.println("3 - Visualizar relatório de espera");
-            System.out.println("4 - Sair");
-            System.out.print("\nEscolha uma opcao:");
+            System.out.println("\n==========================  MENU  ==========================\n");
+            System.out.println("1 - Adicionar processos");
+            System.out.println("2 - Iniciar escalonamento SRT");
+            System.out.println("3 - Iniciar escalonamento Prioridade");
+            System.out.println("4 - Visualizar relatório de espera");
+            System.out.println("5 - Sair");
+            System.out.print("\nEscolha uma opcao: ");
 
             if (!sc.hasNextInt()) {
                 System.out.println("Valor inválido. Digite apenas números");
@@ -29,9 +32,7 @@ public class Main {
 
             switch (menu) {
                 case 1:
-                    System.out.println();
-
-                    System.out.print("Quantos processos deseja adicionar ?");
+                    System.out.print("\nQuantos processos deseja adicionar? ");
                     if (!sc.hasNextInt()) {
                         System.out.println("Valor inválido. Digite apenas números");
                         sc.nextLine();
@@ -41,54 +42,61 @@ public class Main {
                     sc.nextLine();
 
                     for (int i = 0; i < quantidade; i++) {
-                        System.out.print("\nInforme o nome:");
+                        System.out.print("\nInforme o nome: ");
                         String nome = sc.nextLine();
 
-                        System.out.print("Informe o tempo do processo:");
+                        System.out.print("Informe o tempo do processo: ");
                         Integer tempo = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 
-                        System.out.print("Informe o tempo de chegada:");
+                        System.out.print("Informe o tempo de chegada: ");
                         Integer tempoChegada = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 
-                        pr.addNewProcess(nome, tempo, tempoChegada);
+                        System.out.print("Informe a prioridade (menor número = maior prioridade): ");
+                        Integer prioridade = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
+
+                        pr.addNewProcess(nome, tempo, tempoChegada, prioridade);
                     }
                     break;
                 case 2:
                     if (pr.getAllProcess().size() == 0) {
-                        System.out.println("\nNenhum processo adicionado. Digite 1 para adicionar processos\n");
-                        continue;
+                        System.out.println("\nNenhum processo adicionado.\n");
                     } else {
                         try {
-                            runProcess(pr);
+                            SRT.runProcess(pr);
                         } catch (InterruptedException e) {
                             System.out.println("Ocorreu um erro");
                         }
                     }
                     break;
                 case 3:
-
-                    if (pr.getReportFinishedProcess().size() == 0) {
-                        System.out.println(
-                                "\nNenhuma execução encontrada. Digite 2 para realizar o processo de escalonamento\n");
-                        continue;
+                    if (pr.getAllProcess().size() == 0) {
+                        System.out.println("\nNenhum processo adicionado.\n");
                     } else {
-                        System.out.println(
-                                "\n==========================  RELATÓRIO DE ESPERA  ==========================\n\n");
-
+                        try {
+                            Prioridade.runProcess(pr);
+                        } catch (InterruptedException e) {
+                            System.out.println("Ocorreu um erro");
+                        }
+                    }
+                    break;
+                case 4:
+                    if (pr.getReportFinishedProcess().size() == 0) {
+                        System.out.println("\nNenhuma execução encontrada.\n");
+                    } else {
+                        System.out.println("\n==========================  RELATÓRIO  ==========================\n");
                         for (DataProcess item : pr.getReportFinishedProcess().values()) {
                             System.out.println("Processo: " + item.getNome().toUpperCase() + " - Esperou por "
                                     + item.getTempoEspera() + " segundos para finalizar");
                         }
-
                     }
-                    continue;
-                case 4:
+                    break;
+                case 5:
                     System.out.println("Saindo do programa");
                     sair = true;
                     break;
                 default:
                     System.out.println("Número incorreto, tente novamente");
-                    continue;
+                    break;
             }
 
         } while (!sair);
