@@ -1,0 +1,6 @@
+SRT\SRT.class
+Processo\DataProcess.class
+com\mycompany\escalonamentotrabalho\EscalonamentoTrabalho.class
+Processo\DataProcessTAD.class
+com\mycompany\escalonamentotrabalho\Prioridade\Prioridade.class
+Processo\ProcessManipulation.class
