@@ -41,22 +41,28 @@ public class EscalonamentoTrabalho {
                     int quantidade = sc.nextInt();
                     sc.nextLine();
 
-                    for (int i = 0; i < quantidade; i++) {
-                        System.out.print("\nInforme o nome: ");
-                        String nome = sc.nextLine();
+                    try {
+                        for (int i = 0; i < quantidade; i++) {
+                            System.out.print("\nInforme o nome: ");
+                            String nome = sc.nextLine();
 
-                        System.out.print("Informe o tempo do processo: ");
-                        Integer tempo = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
+                            System.out.print("Informe o tempo do processo: ");
+                            Integer tempo = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 
-                        System.out.print("Informe o tempo de chegada: ");
-                        Integer tempoChegada = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
+                            System.out.print("Informe o tempo de chegada: ");
+                            Integer tempoChegada = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 
-                        System.out.print("Informe a prioridade (Quanto menor o numero, maior a prioridade): ");
-                        Integer prioridade = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
+                            System.out.print("Informe a prioridade (Quanto menor o numero, maior a prioridade): ");
+                            Integer prioridade = Integer.parseInt(sc.nextLine().replaceAll("\\D+", ""));
 
-                        pr.addNewProcess(nome, tempo, tempoChegada, prioridade);
+                            pr.addNewProcess(nome, tempo, tempoChegada, prioridade);
+                        }
+                        break;
+                    }catch (IllegalArgumentException e) {
+                        System.out.println();
+                        System.out.println("Valor invalido. Digite apenas números");
+                        System.out.println();
                     }
-                    break;
                 case 2:
                     if (pr.getAllProcess().size() == 0) {
                         System.out.println("\nNenhum processo adicionado.\n");
