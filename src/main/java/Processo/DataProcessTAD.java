@@ -14,6 +14,5 @@ public interface DataProcessTAD {
     boolean hasNoProcesses();
     Map<String, DataProcess> getAllProcess();
     Map<String, DataProcess> getReportFinishedProcess();
-    void imprimirEstadoTabela(Integer tempoAtual, DataProcess cpuProcess);
     void printGantt(String titulo, java.util.List<String> historico);
 }
