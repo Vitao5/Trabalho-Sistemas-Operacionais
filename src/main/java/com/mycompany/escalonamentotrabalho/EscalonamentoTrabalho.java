@@ -18,12 +18,11 @@ public class EscalonamentoTrabalho {
             System.out.println("1 - Adicionar processos");
             System.out.println("2 - Iniciar escalonamento SRT");
             System.out.println("3 - Iniciar escalonamento Prioridade");
-            System.out.println("4 - Visualizar relatorio de espera");
-            System.out.println("5 - Sair");
+            System.out.println("4 - Sair");
             System.out.print("\nEscolha uma opcao: ");
 
             if (!sc.hasNextInt()) {
-                System.out.println("Valor invalido. Digite apenas números");
+                System.out.println("Valor invalido. Digite apenas nUmeros");
                 sc.nextLine();
                 continue;
             }
@@ -34,7 +33,7 @@ public class EscalonamentoTrabalho {
                 case 1:
                     System.out.print("\nQuantos processos deseja adicionar? ");
                     if (!sc.hasNextInt()) {
-                        System.out.println("Valor invalido. Digite apenas números");
+                        System.out.println("Valor invalido. Digite apenas numeros");
                         sc.nextLine();
                         continue;
                     }
@@ -60,7 +59,7 @@ public class EscalonamentoTrabalho {
                         break;
                     }catch (IllegalArgumentException e) {
                         System.out.println();
-                        System.out.println("Valor invalido. Digite apenas números");
+                        System.out.println("Valor invalido. Digite apenas numeros");
                         System.out.println();
                     }
                 case 2:
@@ -86,22 +85,11 @@ public class EscalonamentoTrabalho {
                     }
                     break;
                 case 4:
-                    if (pr.getReportFinishedProcess().size() == 0) {
-                        System.out.println("\nNenhuma execucao encontrada.\n");
-                    } else {
-                        System.out.println("\n==========================  RELATORIO  ==========================\n");
-                        for (DataProcess item : pr.getReportFinishedProcess().values()) {
-                            System.out.println("Processo: " + item.getNome().toUpperCase() + " - Esperou por "
-                                    + item.getTempoEspera() + " segundos para finalizar");
-                        }
-                    }
-                    break;
-                case 5:
                     System.out.println("Saindo do programa");
                     sair = true;
                     break;
                 default:
-                    System.out.println("Número incorreto, tente novamente");
+                    System.out.println("Numero incorreto. tente novamente");
                     break;
             }
 
