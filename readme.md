@@ -39,8 +39,7 @@ SistemasOperacionais/
 | **1** | Adicionar processos (Nome, Tempo, Chegada e Prioridade) |
 | **2** | Iniciar escalonamento SRT |
 | **3** | Iniciar escalonamento Prioridade |
-| **4** | Visualizar relatório de tempo de espera |
-| **5** | Sair |
+| **4** | Sair |
 
 ### 🎯 Algoritmos Implementados
 
