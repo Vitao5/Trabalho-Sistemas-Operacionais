@@ -1,47 +1,60 @@
-# 🖥️ Escalonador de Processos - SRT
+# 🖥️ Escalonador de Processos - SRT e Prioridade
 
 [![Java](https://img.shields.io/badge/Java-21+-orange?logo=java&logoColor=white)](https://www.oracle.com/java/)
 [![Status](https://img.shields.io/badge/Status-Ativo-brightgreen)]()
 [![Licença](https://img.shields.io/badge/Licença-Acadêmico-blue)]()
 
-
 ## 📋 Descrição
 
-Projeto acadêmico de **Sistemas Operacionais** que implementa um escalonador de processos utilizando o algoritmo **SRT (Shortest Remaining Time)**, também conhecido como preempção por tempo restante mais curto.
+Projeto de **Sistemas Operacionais** que implementa um escalonador de processos utilizando os algoritmos **SRT (Shortest Remaining Time)** e **Escalonamento por Prioridade** com técnica de envelhecimento (*aging*).
 
-O algoritmo seleciona sempre o processo com menor tempo de execução restante, garantindo otimização no tempo médio de espera dos processos.
+A ferramenta permite a simulação da entrada de processos na CPU, considerando tempos de chegada, execução e níveis de prioridade, além de gerar relatórios de espera e gráficos de Gantt textuais para análise de desempenho.
 
 ## 📁 Estrutura do Projeto
 
-```
+O projeto adota a arquitetura e padronização do Maven.
+
 SistemasOperacionais/
+├── pom.xml
 ├── src/
-│   ├── Main.java                          # Classe principal com menu interativo
-│   ├── Processo/
-│   │   ├── DataProcess.java               # Modelo de dados do processo
-│   │   ├── DataProcessTAD.java            # Interface TAD (Tipo Abstrato de Dados)
-│   │   └── ProcessManipulation.java       # Gerenciamento de processos
-│   └── SRT/
-│       └── SRT.java                       # Implementação do escalonador SRT
-├── out/                                    # Saída compilada (gerada automaticamente)
-└── README.md                               # Este arquivo
-```
+│   └── main/
+│       └── java/
+│           ├── Processo/
+│           │   ├── DataProcess.java
+│           │   ├── DataProcessTAD.java
+│           │   └── ProcessManipulation.java
+│           ├── SRT/
+│           │   └── SRT.java
+│           └── com/mycompany/escalonamentotrabalho/
+│               ├── EscalonamentoTrabalho.java
+│               └── Prioridade/
+│                   └── Prioridade.java
+└── README.md
 
 ## ⚙️ Funcionalidades
 
 ### Menu Principal
 | Opção | Descrição |
 |-------|-----------|
-| **1** | ➕ Adicionar novos processos - Inserir processos com nome e tempo de execução |
-| **2** | ▶️ Iniciar escalonamento - Executar o algoritmo SRT nos processos adicionados |
-| **3** | 🚪 Sair - Encerrar o programa |
+| **1** | Adicionar processos (Nome, Tempo, Chegada e Prioridade) |
+| **2** | Iniciar escalonamento SRT |
+| **3** | Iniciar escalonamento Prioridade |
+| **4** | Visualizar relatório de tempo de espera |
+| **5** | Sair |
 
-### 🎯 Algoritmo SRT
-- ✓ Seleciona sempre o processo com **menor tempo restante**
-- ✓ Decrementa o tempo em 1 unidade a cada iteração
-- ✓ Move processos bloqueados para o final da fila
-- ✓ Marca processos como finalizados quando tempo chega a 0
-- ✓ Exibe tempo total de escalonamento
+### 🎯 Algoritmos Implementados
+
+**SRT (Shortest Remaining Time):**
+- Seleciona o processo com menor tempo restante.
+- Preemptivo.
+
+**Prioridade (com Aging):**
+- Seleciona o processo baseado no nível de prioridade (menor número = maior prioridade).
+- Implementa *aging*: a cada três ciclos de espera na fila, o processo ganha prioridade para evitar inanição (*starvation*).
+
+### 📊 Observabilidade
+- Geração no terminal ao final da execução.
+- Relatório detalhado do tempo total de espera de cada processo finalizado.
 
 ## 🚀 Como Compilar e Executar
 
@@ -67,32 +80,27 @@ java -cp out Main
 ## 📊 Exemplo de Uso
 
 ```console
-1 - Adicionar novos processos:
-2 - Iniciar o processo de escalonamento
-3 - Sair
+==========================  MENU  ==========================
 
-Escolha uma opcao:1
+1 - Adicionar processos
+2 - Iniciar escalonamento SRT
+3 - Iniciar escalonamento Prioridade
+4 - Visualizar relatorio de espera
+5 - Sair
 
-Quantos processos voce deseja adicionar ?2
-Informe o nome do processo:Processo A
-Informe o tempo do processo:5
-Informe o nome do processo:Processo B
-Informe o tempo do processo:3
+Escolha uma opcao: 1
 
-1 - Adicionar novos processos:
-2 - Iniciar o processo de escalonamento
-3 - Sair
+Quantos processos deseja adicionar? 2
 
-Escolha uma opcao:2
+Informe o nome: A
+Informe o tempo do processo: 5
+Informe o tempo de chegada: 0
+Informe a prioridade (Quanto menor o numero, maior a prioridade): 1
 
-processo atual Processo B Tempo restante 2
-processo: Processo B finalizado
-processo atual Processo A Tempo restante 4
-processo atual Processo A Tempo restante 3
-processo atual Processo A Tempo restante 2
-processo atual Processo A Tempo restante 1
-processo: Processo A finalizado
-Tempo total : 5
+Informe o nome: B
+Informe o tempo do processo: 3
+Informe o tempo de chegada: 1
+Informe a prioridade (Quanto menor o numero, maior a prioridade): 2
 ```
 
 ## 🔍 Como Debugar
@@ -129,8 +137,8 @@ Implementa a interface `DataProcessTAD` e gerencia:
 - 🔄 Atualização de status
 - ❌ Remoção de processos finalizados
 
-### `SRT.java`
-Implementa o algoritmo de escalonamento SRT.
+### `SRT.java  e Prioridade.java`
+Motores de escalonamento que aplicam as regras de negócio de cada algoritmo e gerenciam as transições de estado na CPU.
 
 ## ⚠️ Tratamento de Erros
 
