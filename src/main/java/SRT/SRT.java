@@ -44,7 +44,7 @@ public class SRT {
             tempoAtual++;
         }
         
-        pr.printGantt("STATUS GERAL (GANTT) - SRT", historico);
-        System.out.println("FIM EXECUÇÃO SRT\n");
+        pr.printGantt("STATUS GERAL", historico);
+        System.out.println("FIM EXECUCAO SRT\n");
     }
 }
