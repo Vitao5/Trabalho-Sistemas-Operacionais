@@ -62,7 +62,7 @@ public class ProcessManipulation implements DataProcessTAD {
         return null;
     }
 
-    ///2 Algoritmo - onde verifica a maior prioridade, e ordem alfabetica
+    //Algoritmo onde verifica a maior prioridade
   public DataProcess getNextProcessPrioridade(Integer tempoAtual) {
         DataProcess processNext = null;
 
@@ -127,9 +127,6 @@ public class ProcessManipulation implements DataProcessTAD {
         }
     }
 
-    public void imprimirEstadoTabela(Integer tempoAtual, DataProcess cpuProcess) {
-
-    }
 
     public void printGantt(String titulo, List<String> historico) {
         System.out.println("\n" + titulo);
