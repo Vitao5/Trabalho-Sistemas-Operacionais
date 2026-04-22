@@ -17,7 +17,6 @@ public class Prioridade {
         while (!pr.hasNoProcesses()) {
             processMoment = pr.getNextProcessPrioridade(tempoAtual);
 
-            pr.imprimirEstadoTabela(tempoAtual, processMoment);
 
             if (processMoment == null) {
                 historico.add("-");
@@ -50,7 +49,7 @@ public class Prioridade {
             tempoAtual++;
         }
         
-        pr.printGantt("STATUS GERAL (GANTT) - PRIORIDADE", historico);
-        System.out.println("FIM EXECUÇÃO PRIORIDADE\n");
+        pr.printGantt("TABELAO GERAL - PRIORIDADE", historico);
+        System.out.println("FIM EXECUCAO PRIORIDADE\n");
     }
 }
