@@ -63,7 +63,7 @@ public class ProcessManipulation implements DataProcessTAD {
     }
 
     ///2 Algoritmo - onde verifica a maior prioridade, e ordem alfabetica
-    public DataProcess getNextProcessPrioridade(Integer tempoAtual) {
+  public DataProcess getNextProcessPrioridade(Integer tempoAtual) {
         DataProcess processNext = null;
 
         for (DataProcess item : processo.values()) {
@@ -73,8 +73,10 @@ public class ProcessManipulation implements DataProcessTAD {
                 } else if (item.getPrioridade() < processNext.getPrioridade()) {
                     processNext = item;
                 } else if (item.getPrioridade().equals(processNext.getPrioridade())) {
-                    if (item.getNome().compareToIgnoreCase(processNext.getNome()) < 0) {
-                        processNext = item;
+                    if (!item.getNome().equals(processNext.getNome())) {
+                        if (Math.random() < 0.5) {
+                            processNext = item;
+                        }
                     }
                 }
             }
@@ -86,7 +88,6 @@ public class ProcessManipulation implements DataProcessTAD {
         return processNext;
     }
 
-    //Comparador, e o que troca os processos
     public DataProcess callNextProcessPrioridade(Integer tempoAtual, String processoAtual) {
         DataProcess atual = processo.get(processoAtual);
         if (atual == null) return null;
@@ -97,9 +98,11 @@ public class ProcessManipulation implements DataProcessTAD {
                     atual.setStatus("B");
                     return getNextProcessPrioridade(tempoAtual);
                 } else if (item.getPrioridade().equals(atual.getPrioridade())) {
-                    if (item.getNome().compareToIgnoreCase(atual.getNome()) < 0) {
-                        atual.setStatus("B");
-                        return getNextProcessPrioridade(tempoAtual);
+                    if (!item.getNome().equals(atual.getNome())) {
+                        if (Math.random() < 0.5) {
+                            atual.setStatus("B");
+                            return getNextProcessPrioridade(tempoAtual);
+                        }
                     }
                 }
             }
@@ -125,23 +128,7 @@ public class ProcessManipulation implements DataProcessTAD {
     }
 
     public void imprimirEstadoTabela(Integer tempoAtual, DataProcess cpuProcess) {
-        System.out.println("-------------------------------------------------");
-        System.out.println("[ TEMPO: " + tempoAtual + " ]");
-        System.out.printf("%-10s | %-14s | %-12s\n", "Processo", "Tempo Chegou", "Tempo Proc.");
-        
-        List<DataProcess> todos = new ArrayList<>();
-        todos.addAll(processo.values());
-        todos.addAll(reportFinishedProcess.values());
-        
-        todos.sort(Comparator.comparingInt(DataProcess::getTempoChegada));
 
-        for (DataProcess p : todos) {
-            if (p.getTempoChegada() <= tempoAtual) {
-                System.out.printf("%-10s | %-14d | %-12d\n", p.getNome(), p.getTempoChegada(), p.getTempo());
-            }
-        }
-        System.out.println("\n-> CPU: " + (cpuProcess != null ? cpuProcess.getNome() : "Ocioso"));
-        System.out.println("-------------------------------------------------\n");
     }
 
     public void printGantt(String titulo, List<String> historico) {
